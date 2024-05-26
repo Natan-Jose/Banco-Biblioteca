@@ -1,31 +1,21 @@
-CREATE DATABASE Teste;
-
-USE Teste;
-SHOW DATABASES;
-CREATE TABLE Pessoas (
-    ID INT PRIMARY KEY,
-    Nome VARCHAR(255),
-    Idade INT,
-    Genero VARCHAR(20)
-);
-
-EXPLAIN SELECT * FROM Pessoas; 
-
-CREATE TEMPORARY TABLE teste(
-id INT 
-);
-
-
-SELECT NomeLivro,ISBN13, PrecoLivro
-FROM tbl_livros;
-
 -- INDEX 
+CREATE INDEX idx_editora ON TbObra(NoObra); 
 
-SHOW INDEX FROM TbCurso;
+SHOW INDEX FROM TbObra;
 
-DROP INDEX idx_Curso ON TbCurso;
+SELECT * FROM TbObra;
 
-EXPLAIN SELECT IdCurso, NoCurso FROM TbCurso
-WHERE NoCurso LIKE '%Redes de Computadores';
+-- EXPLAIN - Otimização de performance no banco
 
-CREATE INDEX idx_Curso ON TbCurso(NoCurso); 
+/* Custo da Transação - São as linhas que são lidas para se chegar ao resultado 
+(processamento, mémoria e tempo) */
+
+EXPLAIN SELECT IdObra, NoObra FROM TbObra
+WHERE NoObra LIKE 'La Fortaleza Digital';
+
+DROP INDEX idx_editora ON TbObra;
+
+# NÃO INDICADO
+EXPLAIN SELECT IdObra, NoObra
+FROM TbObra USE INDEX (idx_editora)
+WHERE NoObra LIKE '%Fortaleza Digital';

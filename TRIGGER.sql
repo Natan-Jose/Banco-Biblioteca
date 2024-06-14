@@ -152,6 +152,8 @@ INSERT INTO TbPedidoItem(IdPedidoItem, CoPedido, CoProduto, QtItem)
 VALUES
 (3, 11);
 
+
+
 SELECT * FROM tbproduto;
 SELECT * FROM tbpedido;
 SELECT * FROM tbpedidoitem;
